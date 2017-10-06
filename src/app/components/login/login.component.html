@@ -1,0 +1,33 @@
+<div class="formLogin">
+  <h1><img src="/assets/images/angular.png"><span>Task</span></h1>
+  <md-card>
+    <form (submit)="login()">
+      <md-card-title>Login</md-card-title>
+      <md-form-field class="fullWidth">
+        <input mdInput placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="userEmail" name="userEmail">
+        <md-error *ngIf="emailFormControl.hasError('pattern')">
+          Please enter a valid email address
+        </md-error>
+        <md-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </md-error>
+      </md-form-field>
+      <md-form-field class="fullWidth">
+        <input mdInput placeholder="Password" [formControl]="passFormControl" [(ngModel)]="userPass" name="userPass" type="password">
+          <md-error *ngIf="passFormControl.hasError('required')">
+            Password <strong>required</strong>
+          </md-error>
+      </md-form-field>
+      <div class="button-row tRight">
+        <button md-raised-button color="primary">Login</button>
+      </div>
+    </form>
+    <div class="socialLogin">
+      <button md-raised-button color="primary" class="googleLogin" (click)="loginGoogle()">Login with Google</button>
+      <button md-raised-button color="primary" class="fbLogin" (click)="loginFacebook()">Login with Facebook</button>
+    </div>
+    <div class="accountSignUp">
+      <p>No account? <a href="#">Sign Up</a></p>
+    </div>
+  </md-card>
+</div>
