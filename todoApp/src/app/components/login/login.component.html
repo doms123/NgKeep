@@ -1,0 +1,32 @@
+<div class="formLogin">
+  <mat-card>
+    <form (submit)="login()">
+      <h1><img src="/assets/images/angular.png"><span>Task</span></h1>
+      <mat-form-field class="fullWidth">
+        <input matInput placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="userEmail" name="userEmail">
+        <mat-error *ngIf="emailFormControl.hasError('pattern')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="fullWidth">
+        <input matInput placeholder="Password" [formControl]="passFormControl" [(ngModel)]="userPass" name="userPass" type="password">
+          <mat-error *ngIf="passFormControl.hasError('required')">
+            Password <strong>required</strong>
+          </mat-error>
+      </mat-form-field>
+      <div class="button-row tRight">
+        <button mat-raised-button color="primary">Login</button>
+      </div>
+    </form>
+    <div class="socialLogin">
+      <button mat-raised-button color="primary" class="googleLogin" (click)="loginGoogle()">Login with Google</button>
+      <button mat-raised-button color="primary" class="fbLogin" (click)="loginFacebook()">Login with Facebook</button>
+    </div>
+    <div class="accountSignUp">
+      <p>No account? <a routerLink="/register">Sign Up</a></p>
+    </div>
+  </mat-card>
+</div>
