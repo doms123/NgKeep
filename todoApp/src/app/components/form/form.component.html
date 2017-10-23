@@ -1,0 +1,14 @@
+<div class="formField">
+  <p>Title</p>
+  <form>
+    <mat-form-field>
+      <textarea matInput placeholder="Take a note"></textarea>
+      <input class="fileUpload" type="file" #file>
+    </mat-form-field>
+    <div class="checkboxWrap">
+      <mat-checkbox color="primary">Pin note</mat-checkbox>
+    </div>
+    <button mat-button matTooltip="Upload file" class="btnUpload" (click)="file.click()"><i class="material-icons">cloud_upload</i></button>
+    <button mat-button class="btnSave">Save</button>
+  </form>
+</div>

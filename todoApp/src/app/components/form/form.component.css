@@ -1,0 +1,49 @@
+.formField .btnUpload {
+    min-width: inherit;
+    padding: 0;
+    margin: 0;
+}
+
+.formField {
+    background: #fff;
+    margin-bottom: 30px;
+}
+
+.formField p {
+    margin: 0;
+    font-size: 17px;
+    color: #666;
+    padding: 15px;
+}
+
+.formField .mat-form-field {
+    width: 100%;
+}
+
+.formField form {
+    padding: 15px;
+}
+
+.formField * {
+    color: #666;    
+}
+
+.formField .btnSave {
+    float: right;
+    margin: 0;
+    padding: 0;
+    background: #3f51b5;
+    color: #fff;
+    min-width: 80px;
+    line-height: 32px;
+    border-radius: 0;
+}
+
+.formField .checkboxWrap {
+    margin-bottom: 15px;
+}
+
+.formField .btnSave span {
+    color: #fff;
+}
+

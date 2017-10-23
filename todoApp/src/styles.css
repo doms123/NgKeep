@@ -1,8 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+* {
+    font-size: 14px;
+    font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+}
+
+.clearFix {
+    overflow: hidden;
+}
 
 body {
     margin: 0;
+    background-color: #e8e8e8;
 }
 
 #toast-container {
@@ -12,4 +21,205 @@ body {
 
 #toast-container .toast-title {
     font-size: 16px;
+}
+
+.mat-toolbar-row {
+    height: 56px !important;
+    width: 960px !important;
+    margin: 0 auto !important;
+    position: relative;
+}
+
+.mainContent {
+    padding-top: 90px;
+}
+
+.mat-toolbar {
+    min-height: 56px !important;
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+    background: #3f51b5;
+    color: rgba(255,255,255,.87);
+    position: fixed;
+    z-index: 999;
+}
+
+.mat-toolbar h1 {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.mat-toolbar h1 a {
+    color: rgba(255, 255, 255, 0.87);
+    text-decoration: none;
+}
+
+.mat-toolbar h1 span {
+    position: relative;
+    top: -4px;
+    left: 5px;
+}
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+.mainNav ul {
+    overflow: hidden;
+    padding-left: 20px;
+}
+
+.mainNav li {
+    float: left;
+    list-style: none;
+}
+
+.rightNav ul {
+    overflow: hidden;
+}
+
+.rightNav li {
+    float: left;
+    list-style: none;
+}
+
+.rightNav {
+    position: absolute;
+    right: 0;  
+}
+
+.rightNav button {
+    min-width: inherit;
+    border-radius: 20px;
+    padding: 0;
+    margin: 0 15px;
+}
+
+
+.rightNav button .mat-button {
+    line-height: inherit;
+    padding: 0;
+}
+
+.rightNav img {
+    border-radius: 50%;
+}
+
+.mainNav li.active button,
+.mainNav li:hover button {
+    background-color: rgba(0,0,0,.12) !important;
+}
+
+
+.wrapInner {
+    width: 960px !important;
+    margin: 0 auto !important;
+}
+
+.col1 {
+    width: 45%;
+    float: left;
+    padding: 0;
+    margin-bottom: 30px;
+    margin-left: 6px;
+}
+
+
+.col2 {
+    margin-left: 30px;
+    width: 45%;
+    float: left;
+    margin-bottom: 30px;
+}
+
+.col1 .box,
+.col2 .box {
+    position: relative;
+    background: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.12);
+}
+
+.col1 .box:hover,
+.col2 .box:hover {
+    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 2px 15px rgba(0,0,0,0.30);
+}
+
+.col1 .box .content,
+.col2 .box .content {
+    padding: 30px 15px 15px;
+}
+
+.col1 p,
+.col2 p {
+    color: #666;
+}
+
+.mat-figure {
+    justify-content: left !important;
+}
+
+.fileUpload {
+    display: none;
+}
+
+.btnUpload i {
+    color: #666;
+}
+
+
+
+.col1 .options button,
+.col2 .options button {
+    padding: 0;
+    margin: 0;
+    min-width: inherit;
+}
+
+.col1 .options,
+.col2 .options {
+    padding: 15px 15px 5px 15px;
+}
+
+.col1 .options button,
+.col2 .options button {
+    color: #666;
+}
+
+.col1 .options .btnDelete,
+.col2 .options .btnDelete {
+    margin-left: 10px;
+}
+
+.btnPin {
+    position: absolute !important;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    min-width: inherit !important;
+}
+
+.btnPin i {
+    color: #666;
+    font-size: 24px;
+}
+
+.col2 .pinned {
+    margin-top: 0;
+}
+
+.mat-dialog-container {
+    padding: 0 !important;
+}
+
+.formField {
+    margin-bottom: 0 !important;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.12);
+}
+
+.formField:hover {
+    box-shadow: 0 0 0 0 transparent, 0 0 0 0 transparent, 0 2px 15px rgba(0,0,0,0.30);
+}
+
+button {
+    border-radius: 0 !important;
 }
