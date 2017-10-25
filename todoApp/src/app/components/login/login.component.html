@@ -1,22 +1,16 @@
 <div class="formLogin">
   <mat-card>
-    <form (submit)="login()">
-      <h1><img src="/assets/images/angular.png"><span>Task</span></h1>
+    <form [formGroup]="loginForm" (submit)="loginSubmit()">
+      <h1><img src="/assets/images/angular.png"></h1>
+
       <mat-form-field class="fullWidth">
-        <input matInput placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="userEmail" name="userEmail">
-        <mat-error *ngIf="emailFormControl.hasError('pattern')">
-          Please enter a valid email address
-        </mat-error>
-        <mat-error *ngIf="emailFormControl.hasError('required')">
-          Email is <strong>required</strong>
-        </mat-error>
+        <input matInput placeholder="Email" formControlName="email" [(ngModel)]="email" name="email">
       </mat-form-field>
+
       <mat-form-field class="fullWidth">
-        <input matInput placeholder="Password" [formControl]="passFormControl" [(ngModel)]="userPass" name="userPass" type="password">
-          <mat-error *ngIf="passFormControl.hasError('required')">
-            Password <strong>required</strong>
-          </mat-error>
+        <input matInput placeholder="Password" formControlName="password" [(ngModel)]="password" name="password" type="password">
       </mat-form-field>
+
       <div class="button-row tRight">
         <button mat-raised-button color="primary">Login</button>
       </div>

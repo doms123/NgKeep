@@ -14,8 +14,8 @@ const checkUserById = (id, callback) => {
 };
 
 const addUser = (newUser, callback) => {
-    bycrypt.genSalt(10, (err, salt) => {
-        bycrypt.hash(newUser.password, salt, (err, hash) => {
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
             if(err) throw err;
             newUser.password = hash;
             newUser.save(callback);

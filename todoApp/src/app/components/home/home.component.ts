@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import { FormComponent } from '../form/form.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
@@ -13,9 +13,10 @@ export class HomeComponent implements OnInit {
   animal: string;
   name: string;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    console.log(localStorage.getItem('id_token'))
   }
 
 
@@ -45,5 +46,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  
+  pinned() {
+    this.snackBar.open('Pinned', 'close', {
+      duration: 3000
+    });
+  }
 }

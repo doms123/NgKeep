@@ -34,7 +34,7 @@ require('./config/passport')(passport);
 app.use('/api', require('./routes/user'));
 
 // Load a static file
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 // Create a server listening to port 3000
 app.listen(port, () => {

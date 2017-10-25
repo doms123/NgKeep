@@ -1,7 +1,8 @@
 .formRegister {
   max-width: 340px;
   width: 100%;
-  margin: 70px auto 0;
+  margin: 0 auto;
+  padding-top: 90px;
 }
 
 .formRegister .fullWidth {
@@ -22,7 +23,7 @@
 }
 
 .formRegister h1 img {
-  width: 60px;
+  width: 80px;
 }
 
 .formRegister h1 img {
