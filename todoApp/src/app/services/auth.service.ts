@@ -12,14 +12,14 @@ export class AuthService {
   ) { }
 
   registerUser(user) {
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/api/register', user, {headers: headers})
       .map(res => res.json());
   }
 
   loginUser(user) {
-    let headers = new Headers();
+    const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/api/login', user, {headers: headers})
       .map(res => res.json());
@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   getProfile() {
-    let headers = new Headers();
+    const headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');

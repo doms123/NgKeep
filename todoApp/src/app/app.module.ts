@@ -6,22 +6,45 @@ import { HttpModule } from '@angular/http';
 
 // Angular Material Imports
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule } from '@angular/material';
-import { MatCardModule } from '@angular/material';
-import { MatButtonModule } from '@angular/material';
-import { MatIconModule } from '@angular/material';
-import { MatToolbarModule } from '@angular/material';
-import { MatSidenavModule } from '@angular/material';
-import { MatTooltipModule } from '@angular/material';
-import { MatGridListModule } from '@angular/material';
-import { MatCheckboxModule } from '@angular/material';
-import { MatDialogModule } from '@angular/material';
-import { MatSnackBarModule } from '@angular/material';
-import { MatMenuModule } from '@angular/material';
+import { 
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatStepperModule,
+} from '@angular/material';
 
-// Service Imports
+// Services Imports
 import { AuthService } from './services/auth.service';
+import { NoteService } from './services/note.service';
 
+// Components Imports
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -61,20 +84,39 @@ const appRoutes: Routes = [
     HttpModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatInputModule,
-    MatCardModule,
+    MatAutocompleteModule,
     MatButtonModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatTooltipModule,
-    MatGridListModule,
+    MatButtonToggleModule,
+    MatCardModule,
     MatCheckboxModule,
+    MatChipsModule,
+    MatStepperModule,
+    MatDatepickerModule,
     MatDialogModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
     MatSnackBarModule,
-    MatMenuModule
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, NoteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

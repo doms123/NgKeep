@@ -46,11 +46,10 @@ export class RegisterComponent implements OnInit {
       password: this.password
     };
 
-    if(this.registerForm.valid) {
+    if (this.registerForm.valid) {
       this.authService.registerUser(user).subscribe( data => {
-        if(data.success) {
+        if (data.success) {
           this.registerForm.reset();
-          
           this.snackBar.open('You are now registered', 'close', {
             duration: 3000
           });

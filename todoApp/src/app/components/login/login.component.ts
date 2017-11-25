@@ -21,13 +21,6 @@ export class LoginComponent implements OnInit {
   emailCtrl: FormControl;
   passwordCtrl: FormControl;
   
-
-  // emailFormControl = new FormControl('', [
-  //   Validators.required,
-  //   Validators.pattern(EMAIL_REGEX)]);
-
-  // passFormControl = new FormControl('', [Validators.required]);
-
   constructor(
     private authService: AuthService,
     private snackBar: MatSnackBar,
@@ -42,19 +35,17 @@ export class LoginComponent implements OnInit {
       email: this.emailCtrl,
       password: this.passwordCtrl
     });
-
-
   }
 
   loginSubmit() {
     const user = {
       email: this.email,
       password: this.password
-    }
+    };
 
-    if(this.loginForm.valid) {
+    if (this.loginForm.valid) {
       this.authService.loginUser(user).subscribe(data => {
-        if(data.success) {
+        if (data.success) {
           this.authService.storeUserData(data.token, data.user);
           this.router.navigate(['home']);
         }else {

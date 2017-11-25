@@ -166,8 +166,6 @@ body {
     color: #666;
 }
 
-
-
 .col1 .options button,
 .col2 .options button {
     padding: 0;
@@ -227,6 +225,70 @@ button {
 .mainToolbar {
     top: 0;
 }
+
+.mainContent .box {
+    margin-bottom: 20px;
+}
+
+.mainContent .box h3 {
+    margin: 0;
+    padding: 15px 15px 0;
+}
+
+.col1 .box .content, .col2 .box .content {
+    padding: 0px 15px 15px;
+}
+
+.datePicker input,
+.datePicker .mat-datepicker,
+.datePicker .mat-form-field-infix,
+.datePicker .mat-form-field-underline.mat-disabled {
+    visibility: hidden;
+}
+
+.timeWrap {
+    display: inline-block;
+    width: 250px;
+}
+
+.timeWrap .date {
+    width: 33%;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #666;
+    margin-left: 5px;
+}
+
+.timeWrap .time {
+    width: 64px !important; 
+    margin-left: 5px;
+}
+
+.timeWrap .selectTimeAMPM {
+    width: 50px !important;
+    margin-left: 5px;
+}
+
+.noteDate {
+    position: absolute;
+    font-size: 12px;
+    right: 15px;
+    bottom: 0;
+}
+
+.checkboxWrap {
+    display: inline-block;
+}
+
+.datePicker {
+    width: 30px !important;
+    display: inline-block;
+}
+
+.datePicker .mat-form-field-suffix .mat-icon-button .mat-icon {
+    font-size: 26px;
+}
+
 
 @media only screen and (max-width : 767px) {
     .wrapInner {

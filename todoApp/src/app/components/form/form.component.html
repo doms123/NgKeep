@@ -1,14 +1,45 @@
 <div class="formField">
-  <p>Title</p>
-  <form>
+  <p>Take a notes</p>
+  <form action="" [formGroup]="postForm" method="POST" enctype="multipart/form-data" (submit)="postNotes($event)">
     <mat-form-field>
-      <textarea matInput placeholder="Take a note"></textarea>
-      <input class="fileUpload" type="file" #file>
+      <input matInput placeholder="Title" formControlName="postTitle" [(ngModel)]="postTitle">
     </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput placeholder="Notes" formControlName="postText" [(ngModel)]="postText"></textarea>
+      <input class="fileUpload" #fileInput name="postFile" type="file">
+    </mat-form-field>
+
     <div class="checkboxWrap">
-      <mat-checkbox color="primary">Pin note</mat-checkbox>
+      <mat-checkbox color="primary" formControlName="postPin" [(ngModel)]="postPin">Pin note</mat-checkbox>
     </div>
-    <button mat-button matTooltip="Upload file" class="btnUpload" (click)="file.click()"><i class="material-icons">cloud_upload</i></button>
-    <button mat-button class="btnSave">Save</button>
+
+    <mat-form-field class="datePicker" matTooltip="Choose Date">
+      <input matInput [matDatepicker]="picker" (dateChange)="dateEvent('change', $event)" placeholder="Input disabled" disabled>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker disabled="false"></mat-datepicker>
+    </mat-form-field>
+
+    <div class="timeWrap" *ngIf="dateVal">
+      <span matTooltip="Selected Date">
+        <input type="text" value="{{dateVal}}" class="date" disabled>
+      </span>
+       - 
+      <span matTooltip="Select Time">
+        <mat-form-field class="time">
+          <mat-select placeholder="Time" (change)="timeEvent($event)">
+            <mat-option *ngFor="let row of time" value="{{row.timeStr}}" selected>{{row.timeStr}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+    </div>
+
+    <!-- for fileUpload -->
+    <div class="buttonWrap">
+      <button mat-button type="button" matTooltip="Upload file" class="btnUpload" (click)="fileInput.click()">
+        <i class="material-icons">cloud_upload</i>
+      </button>
+      <button mat-button class="btnSave">Save</button>
+    </div>
   </form>
 </div>

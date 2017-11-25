@@ -1,7 +1,7 @@
 <h2 class="mainH2">Notes</h2>
 <div class="wrapInner clearFix mainContent">
     <div class="col1">
-      <app-form></app-form>
+      <app-form (onPost)="post($event)"></app-form>
       <p class="pinned">Pinned</p>
       <div class="box">
         <button mat-button matTooltip="Pin it" (click)="pinned()" class="btnPin"><i class="ion-pin"></i></button>
@@ -14,45 +14,11 @@
     </div>
     <div class="col2">
         <p class="others">Others</p>
-        <div class="box">
+        <div class="box" *ngFor="let note of notes">
           <button mat-button matTooltip="Pin it" (click)="pinned()" class="btnPin"><i class="ion-pin"></i></button>
-          <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, commodi suscipit ullam harum consequatur inventore? Labore, temporibus doloribus nostrum officia nobis molestias maiores rem deserunt, possimus libero dolore consequuntur tenetur. </p>
-          <div class="options">
-            <button mat-button matTooltip="Edit notes" class="btnEdit" (click)="openDialogEdit()"><i class="material-icons">mode_edit</i></button>
-            <button mat-button matTooltip="Delete notes" class="btnDelete" (click)="openDialogDelete()"><i class="material-icons">delete</i></button>
-          </div>
-        </div>
-
-        <div class="box">
-          <button mat-button matTooltip="Pin it" (click)="pinned()" class="btnPin"><i class="ion-pin"></i></button>
-          <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, commodi suscipit ullam harum consequatur inventore? Labore, temporibus doloribus nostrum officia nobis molestias maiores rem deserunt, possimus libero dolore consequuntur tenetur. </p>
-          <div class="options">
-            <button mat-button matTooltip="Edit notes" class="btnEdit" (click)="openDialogEdit()"><i class="material-icons">mode_edit</i></button>
-            <button mat-button matTooltip="Delete notes" class="btnDelete" (click)="openDialogDelete()"><i class="material-icons">delete</i></button>
-          </div>
-        </div>
-
-        <div class="box">
-          <button mat-button matTooltip="Pin it" (click)="pinned()" class="btnPin"><i class="ion-pin"></i></button>
-          <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, commodi suscipit ullam harum consequatur inventore? Labore, temporibus doloribus nostrum officia nobis molestias maiores rem deserunt, possimus libero dolore consequuntur tenetur. </p>
-          <div class="options">
-            <button mat-button matTooltip="Edit notes" class="btnEdit" (click)="openDialogEdit()"><i class="material-icons">mode_edit</i></button>
-            <button mat-button matTooltip="Delete notes" class="btnDelete" (click)="openDialogDelete()"><i class="material-icons">delete</i></button>
-          </div>
-        </div>
-
-        <div class="box">
-          <button mat-button matTooltip="Pin it" (click)="pinned()" class="btnPin"><i class="ion-pin"></i></button>
-          <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, commodi suscipit ullam harum consequatur inventore? Labore, temporibus doloribus nostrum officia nobis molestias maiores rem deserunt, possimus libero dolore consequuntur tenetur. </p>
-          <div class="options">
-            <button mat-button matTooltip="Edit notes" class="btnEdit" (click)="openDialogEdit()"><i class="material-icons">mode_edit</i></button>
-            <button mat-button matTooltip="Delete notes" class="btnDelete" (click)="openDialogDelete()"><i class="material-icons">delete</i></button>
-          </div>
-        </div>
-
-        <div class="box">
-          <button mat-button matTooltip="Pin it" (click)="pinned()" class="btnPin"><i class="ion-pin"></i></button>
-          <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, commodi suscipit ullam harum consequatur inventore? Labore, temporibus doloribus nostrum officia nobis molestias maiores rem deserunt, possimus libero dolore consequuntur tenetur. </p>
+          <h3>{{note.title}}</h3>
+          <p class="content">{{note.note}}</p>
+          <p class="noteDate">{{note.date_added | date:'MMM d, y, h:mm:ss a'}}</p>
           <div class="options">
             <button mat-button matTooltip="Edit notes" class="btnEdit" (click)="openDialogEdit()"><i class="material-icons">mode_edit</i></button>
             <button mat-button matTooltip="Delete notes" class="btnDelete" (click)="openDialogDelete()"><i class="material-icons">delete</i></button>

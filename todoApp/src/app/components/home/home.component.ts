@@ -2,7 +2,8 @@ import { Component, OnInit, Inject} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import { FormComponent } from '../form/form.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
-
+import { NoteService } from '../../services/note.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -12,19 +13,23 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 export class HomeComponent implements OnInit {
   animal: string;
   name: string;
+  notes: any;
 
-  constructor(public dialog: MatDialog, public snackBar: MatSnackBar) { }
+  constructor(
+    public dialog: MatDialog, 
+    public snackBar: MatSnackBar,
+    public noteService: NoteService
+  ) { }
 
   ngOnInit() {
-    console.log(localStorage.getItem('id_token'))
+    console.log(localStorage.getItem('id_token'));
+    this.showNotes();
   }
 
-
   openDialogEdit(): void {
-    let dialogRef = this.dialog.open(FormComponent, {
+    const dialogRef = this.dialog.open(FormComponent, {
       width: '431px',
-      height: '230px',
-      //data: { name: this.name, animal: this.animal }
+      height: 'auto',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -34,10 +39,8 @@ export class HomeComponent implements OnInit {
   }
 
   openDialogDelete(): void {
-    let dialogRef = this.dialog.open(DeleteDialogComponent, {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '300px',
-      // height: '250px',
-      //data: { name: this.name, animal: this.animal }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -50,5 +53,17 @@ export class HomeComponent implements OnInit {
     this.snackBar.open('Pinned', 'close', {
       duration: 3000
     });
+  }
+
+  showNotes() {
+    console.log('shownots')
+    this.noteService.showNotes().subscribe(res => {
+      this.notes = res;
+    });
+  }
+
+  post(event) {
+    console.log(event);
+    this.showNotes();
   }
 }
