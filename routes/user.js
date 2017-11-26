@@ -6,6 +6,7 @@ const config = require('../config/database');
 const passport = require('passport');
 const multer = require('multer');
 const Note = require('../models/note');
+const path = require('path');
 
 router.post('/register', (req, res) => {
     let newUser = new User.User({
@@ -61,23 +62,52 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res
     res.json({user: req.user});
 });
 
+let fileFilter = function(req, file, cb) {
+    const extension = path.extname(file.originalname);
+    console.log('extension', extension);
+    if(
+        extension != '.txt' &&
+        extension != '.png' &&
+        extension != '.gif' &&
+        extension != '.jpg' &&
+        extension != '.xlsx' &&
+        extension != '.xls' &&
+        extension != '.txt' &&
+        extension != '.doc' &&
+        extension != '.docx' &&
+        extension != '.pdf'
+    ) {
+        req.fileValidationError = 'goes wrong on the mimetype';
+        return cb(null, false, new Error('goes wrong on the mimetype'));
+    }
+
+    cb(null, true);
+}
+
 let storage = multer.diskStorage({ //multers disk storage settings
     destination: function (req, file, cb) {
         cb(null, './uploads/');
     },
     filename: function (req, file, cb) {
         let datetimestamp = Date.now();
-        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1]);
+        let fileName = file.originalname.split('.')[0];
+        cb(null, fileName + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1]);
     }
 });
 
 let upload = multer({ //multer settings
-    storage: storage
+    storage: storage,
+    fileFilter: fileFilter
 }).single('postFile');
 
 router.post('/postNotes', (req, res) => {
     upload(req, res, (err) => {
         if(err) return err;
+        if(req.fileValidationError) {
+            res.json({ success: false, msg: 'You have uploaded an invalid file, Failed to add new post.' });
+        }
+
+
         let newPost = new Note.Note({
             title: req.body.postTitle,
             note: req.body.postText,
@@ -116,10 +146,69 @@ router.post('/postNotesWithoutFile', (req, res) => {
     });
 });
 
-router.get('/notes', (req, res) => {
-    Note.showNotes((err, notes) => {
+router.post('/notes', (req, res) => {
+    let payload = {
+        user_id: req.body.user_id,
+        pin: req.body.pin
+    }
+    Note.showNotes(payload, (err, notes) => {
         res.json(notes);
     });
 });
+
+router.post('/notes-pinned', (req, res) => {
+    let payload = {
+        user_id: req.body.user_id,
+        pin: req.body.pin
+    }
+    Note.showNotesPinned(payload, (err, notes) => {
+        res.json(notes);
+    });
+});
+
+
+router.post('/pinned-notes', (req, res) => {
+    let payload = {
+        _id: req.body.post_id
+    };
+
+    Note.pinnedNotes(payload, (err, notes) => {
+        if(err) {
+            res.json({success: false, msg: 'Error! Unable to pinned your notes.'});
+        }else {
+            res.json({success: true, msg: 'Pinned'});
+        }
+    });
+});
+
+router.post('/unpinned-notes', (req, res) => {
+    let payload = {
+        _id: req.body.post_id
+    };
+
+    Note.unpinnedNotes(payload, (err, notes) => {
+        if(err) {
+            res.json({success: false, msg: 'Error! Unable to unpinned your notes.'});
+        }else {
+            res.json({success: true, msg: 'Unpinned'});
+        }
+    });
+});
+
+router.post('/delete-notes', (req, res) => {
+    let payload = {
+        _id: req.body.post_id
+    };
+
+    Note.deleteNotes(payload, (err, notes) => {
+        if(err) {
+            res.json({success: false, msg: "Error! Unable to delete your notes"});
+        }else {
+            res.json({success: true, msg: "Notes was deleted"});
+        }
+    })
+});
+
+
 
 module.exports = router;

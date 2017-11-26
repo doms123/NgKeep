@@ -19,8 +19,24 @@ const addNote = (newNote, callback) => {
     newNote.save(callback);
 };
 
-const showNotes = (callback) => {
-    Note.find(callback);
+const showNotes = (payload, callback) => {
+    Note.find(payload).exec(callback);
 }
 
-module.exports = { Note, addNote, showNotes};
+const showNotesPinned = (payload, callback) => {
+    Note.find(payload).exec(callback);
+}
+
+const pinnedNotes = (payload, callback) => {
+    Note.update(payload, { $set: { pin: 'true' }}, callback);
+};
+
+const unpinnedNotes = (payload, callback) => {
+    Note.update(payload, { $set: { pin: 'false' }}, callback);
+};
+
+const deleteNotes = (payload, callback) => {
+    Note.remove(payload, callback);
+};
+
+module.exports = {Note, addNote, showNotes, showNotesPinned, pinnedNotes, unpinnedNotes, deleteNotes};

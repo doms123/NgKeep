@@ -108,6 +108,7 @@ export class FormComponent implements OnInit {
       });
       
     } else {
+      this.postPin = (this.postPin) ? 'true' : 'false';
       let note = {
         title: this.postTitle,
         note: this.postText,

@@ -11,9 +11,10 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  animal: string;
   name: string;
   notes: any;
+  pinnedNotes: any;
+  baseUrl:string = "http://localhost:3000/";
 
   constructor(
     public dialog: MatDialog, 
@@ -22,8 +23,8 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(localStorage.getItem('id_token'));
     this.showNotes();
+    this.showNotesPinned();
   }
 
   openDialogEdit(): void {
@@ -33,37 +34,86 @@ export class HomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+      // this.animal = result;
     });
   }
 
-  openDialogDelete(): void {
-    const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      width: '300px',
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+
+  pinned(post_id:string) {
+    this.noteService.pinnedNotes(post_id).subscribe(res => {
+      this.snackBar.open(res.msg, 'close', {
+        duration: 3000
+      });
+
+      this.showNotes();
+      this.showNotesPinned();
     });
   }
 
-  pinned() {
-    this.snackBar.open('Pinned', 'close', {
-      duration: 3000
+  unpinned(post_id:string) {
+    this.noteService.unpinnedNotes(post_id).subscribe(res => {
+      this.snackBar.open(res.msg, 'close', {
+        duration: 3000
+      });
+
+      this.showNotes();
+      this.showNotesPinned();
     });
   }
 
   showNotes() {
-    console.log('shownots')
     this.noteService.showNotes().subscribe(res => {
       this.notes = res;
     });
   }
 
-  post(event) {
-    console.log(event);
-    this.showNotes();
+  showNotesPinned() {
+    this.noteService.showNotesPinned().subscribe(res => {
+      this.pinnedNotes = res;
+    });
   }
+
+  post(event) {
+    this.showNotes();
+    this.showNotesPinned();
+  }
+
+  deleteNote(post_id:string) : void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '300px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('result', result)
+    });
+
+    dialogRef.afterOpen().subscribe(result => {
+      console.log('result', result)
+    });
+    // const dialogRef = this.dialog.open(DeleteDialogComponent, {
+    //   width: '300px',
+    // });
+    // this.noteService.deleteNote(post_id).subscribe(res => {
+    //   dialogRef.afterClosed().subscribe(result => {
+    //     // this.animal = result;
+    //   });
+
+    //   this.snackBar.open(res.msg, 'close', {
+    //     duration: 3000
+    //   });
+
+    //   this.showNotes();
+    //   this.showNotesPinned();
+    // });
+  }
+
+  // openDialogDelete(): void {
+  //   const dialogRef = this.dialog.open(DeleteDialogComponent, {
+  //     width: '300px',
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.animal = result;
+  //   });
+  // }
 }

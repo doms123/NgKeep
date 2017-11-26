@@ -147,6 +147,7 @@ body {
 .col1 .box .content,
 .col2 .box .content {
     padding: 30px 15px 15px;
+    line-height: 1.4;
 }
 
 .col1 p,
@@ -194,6 +195,7 @@ body {
     margin: 0;
     padding: 0;
     min-width: inherit !important;
+    line-height: 45px !important;
 }
 
 .btnPin i {
@@ -233,6 +235,8 @@ button {
 .mainContent .box h3 {
     margin: 0;
     padding: 15px 15px 0;
+    color: #666;
+    font-size: 18px;
 }
 
 .col1 .box .content, .col2 .box .content {
@@ -289,6 +293,30 @@ button {
     font-size: 26px;
 }
 
+.imageWrap img {
+    width: 100%;
+}
+
+.imageWrap, .fileWrap {
+    padding: 0 15px;
+}
+
+.fileWrap a {
+    height: 32px;
+    line-height: 32px;
+}
+
+.fileWrap a span {
+    font-size: 12px !important;
+}
+
+.fileWrap a i {
+    font-size: 18px !important;
+    position: relative;
+    top: -2px;
+    right: 3px;
+}
+
 
 @media only screen and (max-width : 767px) {
     .wrapInner {
@@ -321,6 +349,18 @@ button {
 
     .formField {
         margin-top: 30px;
+        overflow: hidden;
+    }
+
+    .formField .btnSave {
+        display: block;
+        float: left;
+        width: 100%;
+        margin: 15px 0 !important;
+    }
+
+    .formField .btnUpload {
+        display: block;
     }
 
     .rightNav {

@@ -3,25 +3,38 @@
     <div class="col1">
       <app-form (onPost)="post($event)"></app-form>
       <p class="pinned">Pinned</p>
-      <div class="box">
-        <button mat-button matTooltip="Pin it" (click)="pinned()" class="btnPin"><i class="ion-pin"></i></button>
-        <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, commodi suscipit ullam harum consequatur inventore? Labore, temporibus doloribus nostrum officia nobis molestias maiores rem deserunt, possimus libero dolore consequuntur tenetur. </p>
+      <p *ngIf="pinnedNotes?.length == 0">No Pinned notes yet.</p>
+      <div class="box" *ngFor="let pinnedNote of pinnedNotes">
+        <button mat-button matTooltip="Unpin it" (click)="unpinned(pinnedNote._id)" class="btnPin"><i class="ion-pin"></i></button>
+        <h3>{{pinnedNote.title}}</h3>
+        <p class="content">{{pinnedNote.note}}</p>
+        <div class="imageWrap" *ngIf="pinnedNote?.file.split('.')[1] == 'jpg' || pinnedNote?.file.split('.')[1] == 'png' || pinnedNote?.file.split('.')[1] == 'gif'">
+          <img src="{{baseUrl}}uploads/{{pinnedNote.file}}" alt="">
+        </div>
+        <p class="noteDate">{{pinnedNote.date_added | date:'MMM d, y, h:mm a'}}</p>
         <div class="options">
           <button mat-button matTooltip="Edit notes" class="btnEdit" (click)="openDialogEdit()"><i class="material-icons">mode_edit</i></button>
-          <button mat-button matTooltip="Delete notes" class="btnDelete" (click)="openDialogDelete()"><i class="material-icons">delete</i></button>
+          <button mat-button matTooltip="Delete notes" class="btnDelete" (click)="deleteNote(pinnedNote._id)"><i class="material-icons">delete</i></button>
         </div>
       </div>
     </div>
     <div class="col2">
         <p class="others">Others</p>
+        <p *ngIf="notes?.length == 0">No other notes yet.</p>
         <div class="box" *ngFor="let note of notes">
-          <button mat-button matTooltip="Pin it" (click)="pinned()" class="btnPin"><i class="ion-pin"></i></button>
+          <button mat-button matTooltip="Pin it" (click)="pinned(note._id)" class="btnPin"><i class="ion-pin"></i></button>
           <h3>{{note.title}}</h3>
           <p class="content">{{note.note}}</p>
-          <p class="noteDate">{{note.date_added | date:'MMM d, y, h:mm:ss a'}}</p>
+          <div class="imageWrap" *ngIf="note?.file.split('.')[1] == 'jpg' || note?.file.split('.')[1] == 'png' || note?.file.split('.')[1] == 'gif'">
+            <img src="{{baseUrl}}uploads/{{note.file}}" alt="">
+          </div>
+          <div class="fileWrap" *ngIf="note?.file.split('.')[1] != 'jpg' && note?.file.split('.')[1] != 'png' && note?.file.split('.')[1] != 'gif'">
+            <a mat-button href="{{baseUrl}}uploads/{{note.file}}" target="_blank" class="downloadFile" mat-raised-button color="primary"><i class="material-icons">cloud_upload</i> Open File</a>
+          </div>
+          <p class="noteDate">{{note.date_added | date:'MMM d, y, h:mm a'}}</p>
           <div class="options">
             <button mat-button matTooltip="Edit notes" class="btnEdit" (click)="openDialogEdit()"><i class="material-icons">mode_edit</i></button>
-            <button mat-button matTooltip="Delete notes" class="btnDelete" (click)="openDialogDelete()"><i class="material-icons">delete</i></button>
+            <button mat-button matTooltip="Delete notes" class="btnDelete" (click)="deleteNote($event)"><i class="material-icons">delete</i></button>
           </div>
         </div>
     </div>

@@ -6,6 +6,7 @@ const config = require('./config/database');
 const passport = require('passport');
 const app = express();
 const port = 3000;
+const path = require('path');
 
 // Connect to mongo using mongoose
 mongoose.connect(config.database);
@@ -38,7 +39,10 @@ require('./config/passport')(passport);
 app.use('/api', require('./routes/user'));
 
 // Load a static file
-app.use(express.static('public'));
+app.use("/uploads", express.static(__dirname + '/uploads'));
+
+// // Load a static upload file
+// app.use(express.static('uploads'));
 
 // Create a server listening to port 3000
 app.listen(port, () => {
