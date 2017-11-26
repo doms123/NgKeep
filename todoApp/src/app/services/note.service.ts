@@ -82,7 +82,7 @@ export class NoteService {
     const body = {
       post_id: post_id
     };
-
+    console.log('body', body);
     return this.http.post('http://localhost:3000/api/delete-notes', body, {headers: headers})
       .map(res => res.json());
   }

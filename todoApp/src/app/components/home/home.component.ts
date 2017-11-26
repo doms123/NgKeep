@@ -38,8 +38,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-
-
   pinned(post_id:string) {
     this.noteService.pinnedNotes(post_id).subscribe(res => {
       this.snackBar.open(res.msg, 'close', {
@@ -80,16 +78,17 @@ export class HomeComponent implements OnInit {
   }
 
   deleteNote(post_id:string) : void {
+    console.log('post_id', post_id)
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '300px',
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('result', result)
+      data: {post_id: post_id}
     });
 
-    dialogRef.afterOpen().subscribe(result => {
-      console.log('result', result)
+    dialogRef.afterClosed().subscribe(result => {
+      this.showNotes();
+      this.showNotesPinned();
     });
+
     // const dialogRef = this.dialog.open(DeleteDialogComponent, {
     //   width: '300px',
     // });

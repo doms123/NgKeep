@@ -8,8 +8,13 @@
         <button mat-button matTooltip="Unpin it" (click)="unpinned(pinnedNote._id)" class="btnPin"><i class="ion-pin"></i></button>
         <h3>{{pinnedNote.title}}</h3>
         <p class="content">{{pinnedNote.note}}</p>
-        <div class="imageWrap" *ngIf="pinnedNote?.file.split('.')[1] == 'jpg' || pinnedNote?.file.split('.')[1] == 'png' || pinnedNote?.file.split('.')[1] == 'gif'">
-          <img src="{{baseUrl}}uploads/{{pinnedNote.file}}" alt="">
+        <div *ngIf="pinnedNote?.file">
+          <div class="imageWrap" *ngIf="pinnedNote?.file.split('.')[1] == 'jpg' || pinnedNote?.file.split('.')[1] == 'png' || pinnedNote?.file.split('.')[1] == 'gif'">
+            <img src="{{baseUrl}}uploads/{{pinnedNote.file}}" alt="">
+          </div>
+          <div class="fileWrap" *ngIf="pinnedNote?.file.split('.')[1] != 'jpg' && pinnedNote?.file.split('.')[1] != 'png' && pinnedNote?.file.split('.')[1] != 'gif'">
+            <a mat-button href="{{baseUrl}}uploads/{{note.file}}" target="_blank" class="downloadFile" mat-raised-button color="primary"><i class="material-icons">cloud_upload</i> Open File</a>
+          </div>
         </div>
         <p class="noteDate">{{pinnedNote.date_added | date:'MMM d, y, h:mm a'}}</p>
         <div class="options">
@@ -25,16 +30,18 @@
           <button mat-button matTooltip="Pin it" (click)="pinned(note._id)" class="btnPin"><i class="ion-pin"></i></button>
           <h3>{{note.title}}</h3>
           <p class="content">{{note.note}}</p>
-          <div class="imageWrap" *ngIf="note?.file.split('.')[1] == 'jpg' || note?.file.split('.')[1] == 'png' || note?.file.split('.')[1] == 'gif'">
-            <img src="{{baseUrl}}uploads/{{note.file}}" alt="">
-          </div>
-          <div class="fileWrap" *ngIf="note?.file.split('.')[1] != 'jpg' && note?.file.split('.')[1] != 'png' && note?.file.split('.')[1] != 'gif'">
-            <a mat-button href="{{baseUrl}}uploads/{{note.file}}" target="_blank" class="downloadFile" mat-raised-button color="primary"><i class="material-icons">cloud_upload</i> Open File</a>
+          <div *ngIf="note?.file">
+            <div class="imageWrap" *ngIf="note?.file.split('.')[1] == 'jpg' || note?.file.split('.')[1] == 'png' || note?.file.split('.')[1] == 'gif'">
+              <img src="{{baseUrl}}uploads/{{note.file}}" alt="">
+            </div>
+            <div class="fileWrap" *ngIf="note?.file.split('.')[1] != 'jpg' && note?.file.split('.')[1] != 'png' && note?.file.split('.')[1] != 'gif'">
+              <a mat-button href="{{baseUrl}}uploads/{{note.file}}" target="_blank" class="downloadFile" mat-raised-button color="primary"><i class="material-icons">cloud_upload</i> Open File</a>
+            </div>
           </div>
           <p class="noteDate">{{note.date_added | date:'MMM d, y, h:mm a'}}</p>
           <div class="options">
             <button mat-button matTooltip="Edit notes" class="btnEdit" (click)="openDialogEdit()"><i class="material-icons">mode_edit</i></button>
-            <button mat-button matTooltip="Delete notes" class="btnDelete" (click)="deleteNote($event)"><i class="material-icons">delete</i></button>
+            <button mat-button matTooltip="Delete notes" class="btnDelete" (click)="deleteNote(note._id)"><i class="material-icons">delete</i></button>
           </div>
         </div>
     </div>

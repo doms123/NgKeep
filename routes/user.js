@@ -199,7 +199,7 @@ router.post('/delete-notes', (req, res) => {
     let payload = {
         _id: req.body.post_id
     };
-
+    console.log('payload', payload)
     Note.deleteNotes(payload, (err, notes) => {
         if(err) {
             res.json({success: false, msg: "Error! Unable to delete your notes"});
