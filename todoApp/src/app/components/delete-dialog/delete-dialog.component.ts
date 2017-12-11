@@ -24,6 +24,7 @@ export class DeleteDialogComponent implements OnInit {
   }
 
   confirmDeleteClick() {
+    console.log('this.data', this.data);
     this.noteService.deleteNote(this.data).subscribe(res => {
       this.snackBar.open(res.msg, 'close', {
         duration: 3000

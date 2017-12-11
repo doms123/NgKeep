@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   emailCtrl: FormControl;
   passwordCtrl: FormControl;
+  is_authenticating: boolean = false;
   
   constructor(
     private authService: AuthService,
@@ -38,6 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginSubmit() {
+    this.is_authenticating = true;
     const user = {
       email: this.email,
       password: this.password
@@ -45,15 +47,27 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.valid) {
       this.authService.loginUser(user).subscribe(data => {
+        this.is_authenticating = false;
         if (data.success) {
           this.authService.storeUserData(data.token, data.user);
-          this.router.navigate(['home']);
         }else {
-          this.snackBar.open('Invalid Email or Passowrd!', 'close', {
+          this.snackBar.open(data.msg, 'close', {
             duration: 3000
           });
         }
       });
+    }else {
+      this.is_authenticating = false;
     }
+  }
+
+  loginWithGoogle() {
+    this.is_authenticating = true;
+    window.location.href = "http://localhost:3000/api/google-login";
+  }
+
+  loginWithFacebook() {
+    this.is_authenticating = true;
+    window.location.href = "http://localhost:3000/api/facebook-login";
   }
 }

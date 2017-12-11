@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   name: string;
   email: string;
   password: string;
+  isSubmitted:boolean = false;
 
   registerForm: FormGroup;
   nameCtrl: FormControl;
@@ -40,25 +41,37 @@ export class RegisterComponent implements OnInit {
   }
 
   registerSubmit() {
+    this.isSubmitted = true;
     const user = {
       name: this.name,
       email: this.email,
-      password: this.password
+      password: this.password,
+      is_active: false,
+      about: '',
+      phone: '',
+      address: '',
+      website: '',
+      photo: '',
+      cover_photo: ''
     };
 
     if (this.registerForm.valid) {
-      this.authService.registerUser(user).subscribe( data => {
-        if (data.success) {
+      this.authService.registerEmailVerification(user).subscribe(data => {
+        this.isSubmitted = false;
+        if(data.success) {
           this.registerForm.reset();
-          this.snackBar.open('You are now registered', 'close', {
+          this.snackBar.open(data.msg, 'close', {
             duration: 3000
           });
 
           this.router.navigate(['']);
-
         }else {
-          alert('error');
+          this.snackBar.open(data.msg, 'close', {
+            duration: 3000
+          });
         }
+
+        
       });
     }
   }

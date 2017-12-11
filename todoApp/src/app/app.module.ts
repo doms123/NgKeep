@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -43,6 +43,8 @@ import {
 // Services Imports
 import { AuthService } from './services/auth.service';
 import { NoteService } from './services/note.service';
+import { ProfileService } from './services/profile.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 // Components Imports
 import { AppComponent } from './app.component';
@@ -54,14 +56,18 @@ import { NavComponent } from './components/nav/nav.component';
 import { FormComponent } from './components/form/form.component';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { ProfileComponent } from './components/profile/profile.component';
-
+import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component';
+import { ProfileFormComponent } from './components/profile-form/profile-form.component';
+import { ConfirmRegistrationComponent } from './components/confirm-registration/confirm-registration.component';
 
 const appRoutes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'home', component: HomeComponent},
+  {path: 'home/:id', component: HomeComponent},
+  {path: 'home', component: HomeComponent, canActivate:[AuthGuardService]},
   {path: 'reminders', component: RemindersComponent},
-  {path: 'profile', component: ProfileComponent},
+  {path: 'profile', component: ProfileComponent, canActivate:[AuthGuardService]},
+  {path: 'confirm-register/:id', component: ConfirmRegistrationComponent},
 ];
 
 @NgModule({
@@ -74,9 +80,12 @@ const appRoutes: Routes = [
     NavComponent,
     FormComponent,
     DeleteDialogComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditDialogComponent,
+    ProfileFormComponent,
+    ConfirmRegistrationComponent
   ],
-  entryComponents: [FormComponent, DeleteDialogComponent],
+  entryComponents: [EditDialogComponent, DeleteDialogComponent, ProfileFormComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
@@ -92,7 +101,6 @@ const appRoutes: Routes = [
     MatChipsModule,
     MatStepperModule,
     MatDatepickerModule,
-    MatDialogModule,
     MatExpansionModule,
     MatGridListModule,
     MatIconModule,
@@ -115,8 +123,9 @@ const appRoutes: Routes = [
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatDialogModule
   ],
-  providers: [AuthService, NoteService],
+  providers: [AuthService, NoteService, ProfileService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

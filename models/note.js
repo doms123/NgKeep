@@ -39,4 +39,4 @@ const deleteNotes = (payload, callback) => {
     Note.find(payload).remove().exec(callback);
 };
 
-module.exports = {Note, addNote, showNotes, showNotesPinned, pinnedNotes, unpinnedNotes, deleteNotes};
+module.exports = { Note, addNote, showNotes, showNotesPinned, pinnedNotes, unpinnedNotes, deleteNotes};

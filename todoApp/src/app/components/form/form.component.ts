@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, Renderer2, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { NoteService } from '../../services/note.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar} from '@angular/material';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 @Component({
@@ -31,6 +31,7 @@ export class FormComponent implements OnInit {
   constructor(
     private noteService: NoteService,
     private snackbar: MatSnackBar,
+    
   ) { }
 
   ngOnInit() {
@@ -44,8 +45,10 @@ export class FormComponent implements OnInit {
       postPin: this.postPinCtrl,
     });
 
-    this.userObj = JSON.parse(localStorage.getItem('user'));
-    this.userid = this.userObj['userid'];
+    setTimeout(() => {
+      this.userObj = JSON.parse(localStorage.getItem('user'));
+      this.userid = this.userObj['userid'];
+    }, 400);
 
     let maxTime = 24;
     
@@ -79,52 +82,58 @@ export class FormComponent implements OnInit {
   }
 
   postNotes(event) {
-    let postDateTime = '';
-    if (this.dateVal != null) {
-      let postDateTimeArr = this.dateVal.split('/');
-      let postDate = postDateTimeArr[2] + '-' + postDateTimeArr[1] + '-' + postDateTimeArr[0];
+    this.userObj = JSON.parse(localStorage.getItem('user'));
+    this.userid = this.userObj['userid'];
+    console.log('this.userid', this.userid);
+    if(this.postForm.valid) {
+      let postDateTime = '';
+      if (this.dateVal != null) {
+        let postDateTimeArr = this.dateVal.split('/');
+        let postDate = postDateTimeArr[2] + '-' + postDateTimeArr[1] + '-' + postDateTimeArr[0];
 
-      postDateTime = postDate+' '+this.datetime+':00';
-    }
-    let formData = new FormData();
-    if (this.el.nativeElement.files[0] != null) { // if has file to upload
-      let file = this.el.nativeElement.files[0];
-
-      this.postPin = (this.postPin) ? 'true' : 'false';
-      formData.append('postTitle', this.postTitle);
-      formData.append('postText', this.postText);
-      formData.append('postPin', this.postPin);
-      formData.append('postFileName', file.name);
-      formData.append('postFile', file, file.name);
-      formData.append('user_id', this.userid);
-      formData.append('post_date', postDateTime);
-      
-      this.noteService.postNotes(formData).subscribe(res => {
-        this.snackbar.open(res.msg, 'close', {
-          duration: 5000
+        postDateTime = postDate+' '+this.datetime+':00';
+      }
+      let formData = new FormData();
+      if (this.el.nativeElement.files[0] != null) { // if has file to upload
+        let file = this.el.nativeElement.files[0];
+        console.log('this.userid', this.userid);
+        this.postPin = (this.postPin) ? 'true' : 'false';
+        formData.append('postTitle', this.postTitle);
+        formData.append('postText', this.postText);
+        formData.append('postPin', this.postPin);
+        formData.append('postFileName', file.name);
+        formData.append('postFile', file, file.name);
+        formData.append('user_id', this.userid);
+        formData.append('post_date', postDateTime);
+        
+        this.noteService.postNotes(formData).subscribe(res => {
+          this.snackbar.open(res.msg, 'close', {
+            duration: 5000
+          });
+          this.onPost.emit(event.value);
+          this.postForm.reset();
         });
-        this.onPost.emit(event.value);
-        this.postForm.reset();
-      });
-      
-    } else {
-      this.postPin = (this.postPin) ? 'true' : 'false';
-      let note = {
-        title: this.postTitle,
-        note: this.postText,
-        pin: this.postPin,
-        file: '',
-        user_id: this.userid,
-        post_date: postDateTime
-      };
-      this.noteService.postNotesWithoutFile(note).subscribe(res => {
-        this.snackbar.open(res.msg, 'close', {
-          duration: 5000
-        });
+        
+      } else {
+        console.log('this.userid', this.userid);
+        this.postPin = (this.postPin) ? 'true' : 'false';
+        let note = {
+          title: this.postTitle,
+          note: this.postText,
+          pin: this.postPin,
+          file: '',
+          user_id: this.userid,
+          post_date: postDateTime
+        };
+        this.noteService.postNotesWithoutFile(note).subscribe(res => {
+          this.snackbar.open(res.msg, 'close', {
+            duration: 5000
+          });
 
-        this.onPost.emit(event);
-        this.postForm.reset();
-      });
+          this.onPost.emit(event);
+          this.postForm.reset();
+        });
+      }
     }
   }
 }

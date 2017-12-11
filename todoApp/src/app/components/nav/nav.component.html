@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="mainToolbar">
+<mat-toolbar color="primary" class="mainToolbar" *ngIf="isloggedIn">
     <h1><a routerLink="/home"><i class="material-icons md-24">event_note</i><span>NG Keep</span></a></h1>
     <nav class="mainNav">
       <ul>
@@ -11,13 +11,19 @@
         <li><button mat-button matTooltip="Refresh" (click)="refreshClick()"><i class="material-icons md-24">refresh</i></button></li>
         <li><button mat-button matTooltip="Notification"><i class="material-icons md-24">notifications_active</i></button></li>
         <!-- <li><button mat-button><i class="material-icons md-24">account_circle</i></button></li> -->
-        <li><button mat-button matTooltip="Profile" [matMenuTriggerFor]="menu"><img src="https://lh3.googleusercontent.com/-ZL_pVfQMDCs/AAAAAAAAAAI/AAAAAAAAAAA/ANQ0kf5Sp00kw_JyMk2rAP_YfjXd-wzzNg/s32-c-mo/photo.jpg" alt=""></button></li>
+        <li>
+          <button mat-button matTooltip="Profile" [matMenuTriggerFor]="menu">
+       
+            <img *ngIf="profilePhoto == ''" class="profilePhoto" src="https://lh3.googleusercontent.com/-ZL_pVfQMDCs/AAAAAAAAAAI/AAAAAAAAAAA/ANQ0kf5Sp00kw_JyMk2rAP_YfjXd-wzzNg/s32-c-mo/photo.jpg" alt="">
+            <img *ngIf="profilePhoto != ''"  class="profilePhoto" src="{{baseUrl}}uploads/{{profilePhoto}}" alt="">
+          </button>
+        </li>
       </ul>
     </nav>
   </mat-toolbar>
 
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
+    <button mat-menu-item routerLink="/profile">
       <mat-icon>person_pin</mat-icon>
       <span>Profile</span>
     </button>

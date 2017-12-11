@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class NoteService {
+export class NoteService implements OnInit {
   userObj: object;
   userid: string;
 
   constructor(
     private http: Http
-  ) {
-    this.userObj = JSON.parse(localStorage.getItem('user'));
-    this.userid = this.userObj['userid'];
+  ) {}
+
+  ngOnInit() {
+
   }
 
   postNotes(post) {
@@ -24,27 +25,26 @@ export class NoteService {
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost:3000/api/postNotesWithoutFile', note)
       .map(res => res.json());
-      
   }
 
-  showNotes() {
+  showNotes(userid) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     
     const body = {
-      user_id: this.userid,
+      user_id: userid,
       pin: "false"
     };
     return this.http.post('http://localhost:3000/api/notes', body, {headers:headers})
       .map(res => res.json());
   }
 
-  showNotesPinned() {
+  showNotesPinned(userid) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     
     const body = {
-      user_id: this.userid,
+      user_id: userid,
       pin: "true"
     };
     return this.http.post('http://localhost:3000/api/notes-pinned', body, {headers:headers})
@@ -80,10 +80,23 @@ export class NoteService {
     headers.append('Content-Type', 'application/json');
 
     const body = {
-      post_id: post_id
+      _id: post_id
     };
-    console.log('body', body);
+    
     return this.http.post('http://localhost:3000/api/delete-notes', body, {headers: headers})
+      .map(res => res.json());
+  }
+
+  postEditedNote(post) {
+    let post_id = post.get('post_id');
+    return this.http.post('http://localhost:3000/api/post-edit-notes/' + post_id, post)
+      .map(res => res.json());
+  }
+
+  postEditedNoteWithoutFile(note, post_id) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/api/post-edit-notes-nofile/' + post_id, note)
       .map(res => res.json());
   }
 }

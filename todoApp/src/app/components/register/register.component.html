@@ -19,7 +19,7 @@
       </mat-form-field>
 
       <div class="button-row tRight">
-        <button mat-raised-button color="primary">Register</button>
+        <button mat-raised-button color="primary" [disabled]="isSubmitted">Register</button>
       </div>
     </form>
     <div class="accountSignUp">

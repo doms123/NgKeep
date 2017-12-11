@@ -30,6 +30,7 @@ export class AuthService {
     localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
     this.user = user;
+    window.location.href = "/home";
   }
 
   logoutUser() {
@@ -50,5 +51,20 @@ export class AuthService {
   loadToken() {
     const token = localStorage.getItem('id_token');
     this.authToken = token;
+  }
+
+  registerEmailVerification(user) {
+    console.log(user);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/api/register-email-verification', user, {headers: headers})
+      .map(res => res.json());
+  }
+
+  loginWithGoogle() {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    return this.http.get('http://localhost:3000/api/google-login', {headers: headers})
+      .map(res => res.json());
   }
 }

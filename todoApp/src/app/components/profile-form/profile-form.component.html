@@ -1,0 +1,24 @@
+<div class="formField">
+  <p>Edit Profile</p>
+  <form action="" [formGroup]="editProfileForm" method="POST" (submit)="editProfileOnSubmit($event)">
+    <mat-form-field>
+      <textarea matInput placeholder="About me" class="aboutme" formControlName="about" [(ngModel)]="about"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Phone number" formControlName="phone" [(ngModel)]="phone">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Address" formControlName="address" [(ngModel)]="address">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Name" formControlName="name" [(ngModel)]="name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email" [(ngModel)]="email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Website" formControlName="website" [(ngModel)]="website">
+    </mat-form-field>
+    <button mat-button class="btnSave">Save</button>
+  </form>
+</div>

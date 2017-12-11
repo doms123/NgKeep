@@ -1,0 +1,185 @@
+.coverPhoto img {
+    width: 100%;
+    max-height: 250px;
+}
+
+.contentWrap {
+    margin: 0 5px;
+}
+
+.coverPhoto {
+    position: relative;
+}
+
+.profile {
+    position: relative;
+}
+
+.profile i {
+    position: absolute;
+    bottom: 10px;
+    z-index: 999;
+    color: #fff;
+    right: 10px;
+    cursor: pointer;
+}
+
+.profile i:hover {
+    color: rgba(0,0,0,.7);
+}
+
+.mainContent {
+    padding-top: 56px !important;
+}
+
+.profilePic {
+    overflow: hidden;
+}
+
+.profilePic img {
+    padding: 2px;
+    border-radius: 3px;
+    background: #fff;
+    width: 160px;
+    height: 160px;
+}
+
+.profileArea {
+    position: absolute;
+    top: 88px;
+    padding-left: 20px;
+    overflow: hidden;
+}
+
+.profile,
+.profileInfo {
+    float: left;
+}
+
+button {
+    background: rgba(0,0,0,.38);
+    color: rgba(255, 255, 255, 0.87);
+    min-width: 80px;
+    line-height: 32px;
+    padding: 0 8px;
+    margin-bottom: 10px;
+}
+
+.profileArea .mat-button-wrapper {
+    font-size: 12px !important;
+}
+
+.profileInfo p {
+    color: rgba(255, 255, 255, 0.87);
+    font-size: 14px;
+    margin-left: 20px;
+}
+
+.profileInfo .name {
+    margin-top: 70px;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 0;
+}
+
+.profileInfoArea {
+    background: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.2), 0 1px 5px 0 rgba(0,0,0,0.12);
+    position: relative;
+    padding: 20px;
+    overflow: hidden;
+    margin: 15px 5px 5px;
+    color: #666;
+}
+
+.profileInfoArea .aboutWrap {
+    width: 45%;
+    float: left;
+    margin-right: 40px;
+}
+
+.profileInfoArea .contactWrap {
+    width: 45%;
+    float: left;
+}
+
+.profileInfoArea .contactBox {
+    margin-bottom: 5px;
+}
+
+.profileInfoArea .contactBox .label {
+    font-weight: bold;
+    width: 70px;
+    display: inline-block;
+}
+
+.profileInfoArea .editProfileInfo {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.profileInfoArea .editProfileInfo:hover {
+   color: #000;
+}
+
+@media only screen and (max-width : 767px) {
+    .profileInfoArea .aboutWrap {
+        width: 100%;
+    }
+
+    .profileArea {
+        position: absolute;
+        top: 108px;
+        padding-left: 10px;
+        overflow: hidden;
+    }
+
+    .contentWrap {
+        margin: 0;
+    }
+
+    .profileInfoArea {
+        margin: 15px 10px 30px;
+    }
+
+    .profilePic img {
+        border-radius: 50%;
+        width: 90px;
+        height: 90px;
+    }
+
+    .profileInfo p {
+        margin-left: 10px;
+    }
+
+    .profileInfo .name {
+        margin-top: 0;
+        font-size: 14px;
+    }
+
+    .profileInfo {
+        margin-top: 25px;
+    }
+
+    .profileInfo .email {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    .profile i {
+        bottom: 10px;
+        right: 34px;
+    }
+
+    .profileInfoArea .contactBox .label {
+        width: inherit;
+        display: block;
+    }
+
+    .aboutWrap {
+        margin-bottom: 10px;
+    }
+}
+

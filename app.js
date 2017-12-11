@@ -28,6 +28,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.setHeader('Access-Control-Allow-Credentials', true); // If needed
     next();
 });
 
@@ -36,11 +37,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);
 
+
 app.use('/api', require('./routes/user'));
 
 // Load a static file
 app.use("/uploads", express.static(__dirname + '/uploads'));
-
+app.use('/', express.static('public'))
 // // Load a static upload file
 // app.use(express.static('uploads'));
 
